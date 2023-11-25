@@ -71,6 +71,25 @@ curl -L https://github.com/purton-tech/rust-on-nails/archive/main.tar.gz | \
   && del devcontainer-template.json
 ```
 
+> `.devcontainer/docker-compose.yml`を次の通り修正する必要があります。
+
+```yaml
+ version: '3.4'
+ services:
+
+   db:
+     image: postgres:14-alpine
+     environment:
+       POSTGRES_PASSWORD: testpassword
+       POSTGRES_USER: postgres
+     healthcheck:
+-      test: ["CMD-SHELL", "pg_isready -U postgres"]
++      test: ["CMD-SHELL", "pg_isready -U vscode"]
+       interval: 10s
+       timeout: 5s
+       retries: 5
+```
+
 #### VS Code
 
 Visual Studio Code内にそのフォルダを読み込みます。

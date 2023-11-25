@@ -1,0 +1,17 @@
+[package]
+name = "db"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+
+[dependencies]
+cornucopia_async = "0.4.0"
+deadpool-postgres = "0.10.5"
+futures = "0.3.29"
+postgres-types = "0.2.6"
+rustls = { version = "0.21.9", features = ["dangerous_configuration"] }
+serde = { version = "1.0.193", features = ["derive"] }
+tokio = { version = "1.34.0", features = ["macros", "rt-multi-thread"] }
+tokio-postgres = "0.7.10"
+tokio-postgres-rustls = "0.10.0"
+webpki-roots = "0.25.3"
