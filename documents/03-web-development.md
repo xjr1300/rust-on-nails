@@ -642,3 +642,74 @@ async fn accept_form(
 ```sh
 curl http://localhost:3000/sign_up --data-raw 'email=bad-data'
 ```
+
+## アセットパイプライン
+
+アセットパイプラインは、JavaScriptとCSSアセットを連結そして縮小または圧縮するフレームワークを提供します。
+また、それは他の言語と[TypeScript](https://www.typescriptlang.org/)や[SASS](https://sass-lang.com/)のようなプリプロセッサでこれらのアセットを記述する能力を追加します。
+
+私は、いくつかのプロジェクトで[Parcel](https://parceljs.org/)を使用してきましたが、以前は[Webpack](https://webpack.js.org/)でした。
+私は、Parcelを使用することが容易であることを発見したので、Nailsでもそれを推奨します。
+
+### ボリュームの準備
+
+もし、あなたが`.devcontainer/docker-compose.yml`を確認した場合、コメントアウトされた行を確認できます。
+
+```yaml
+#- node_modules:/workspace/crates/asset-pipeline/node_modules # Set target as a volume for performance.
+```
+
+コメントを戻して、開発コンテナをリビルドしてください。
+これは、ボリュームとしてnode_moduleフォルダを準備して、ビルドで良いパフォーマンスを提供します。
+node_moduleフォルダには多くのファイルがあり、Dockerがそれらをあなたのメインファイルシステムと同期を試みるためです。
+
+また、`.devcontainer/Dockerfile`の次の行をアンコメントしてください。
+
+```Dockerfile
+#RUN sudo mkdir -p /workspace/crates/asset-pipeline/node_modules && sudo chown $USERNAME:$USERNAME /workspace/crates/asset-pipeline/node_modules
+```
+
+### .gitignore
+
+私たちは、次の`.gitignore`ファイルが必要です。
+
+```text
+dist
+node_modules
+.parcel-cache
+```
+
+### Parcelのインストール
+
+Parcelをインストールしてください。
+
+<!-- markdownling-disable MD014 -->
+```sh
+$ mdir crates/asset-pipeline
+$ cd crates/asset-pipeline
+$ npm install --save-dev parcel
+```
+<!-- markdownlint-enable -->
+
+`crates/asset-pipeline/index.ts`ファイルを作成してください。
+
+```typescript
+import './scss/index.scss'
+```
+
+そして、`crates/asset-pipeline/scss/index.scss`ファイルも作成してください。
+
+```scss
+h1 {
+    color: red;
+}
+```
+
+そして、`package.json`のscriptセクションに追加してください。
+
+```json
+ "scripts": {
+    "start": "parcel watch ./asset-pipeline/index.ts",
+    "release": "parcel build ./asset-pipeline/index.ts"
+  },
+```

@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  },
+  "scripts": {
+    "start": "parcel watch ./asset-pipeline/index.ts",
+    "release": "parcel build ./asset-pipeline/index.ts"
+  }
+}

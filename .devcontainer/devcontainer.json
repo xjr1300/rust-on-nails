@@ -7,7 +7,7 @@
 	],
 	"service": "development",
 	"workspaceFolder": "/workspace",
-		
+
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
 		"vscode": {
@@ -36,7 +36,7 @@
 		"NAME": "${localEnv:NAME}",
 		// Pass in the host directory for Docker mount commands from inside the container
 		"HOST_PROJECT_PATH": "${localWorkspaceFolder}"
-	},
+	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5432],
@@ -45,5 +45,5 @@
 	// "postCreateCommand": "rustc --version",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	// "remoteUser": "vscode"
 }
