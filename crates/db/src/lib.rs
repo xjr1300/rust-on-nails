@@ -57,7 +57,11 @@ mod tests {
 
         let client = pool.get().await.unwrap();
 
-        let users = crate::queries::users::get_users().bind(&client).all().await.unwrap();
+        let users = crate::queries::users::get_users()
+            .bind(&client)
+            .all()
+            .await
+            .unwrap();
 
         dbg!(users);
     }

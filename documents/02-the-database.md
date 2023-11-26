@@ -141,7 +141,7 @@ $ psql $DATABASE_URL -c 'SELECT count(*) FROM users;'
 
 [Cornucopia](https://github.com/cornucopia-rs/cornucopia)は、SQLの小さなスニペットを持ち、それらをRustの関数に変更するコードジェネレータです。
 
-私達は、すべてのデータベースロジックを一箇所に保管できるように、`crates/db`フォルダをクレートに変換します。
+私たちは、すべてのデータベースロジックを一箇所に保管できるように、`crates/db`フォルダをクレートに変換します。
 
 次を実行します。
 
@@ -305,7 +305,7 @@ include!(concat!(env!("OUT_DIR"), "/cornucopia.rs"));
 ### databaseクレートのテスト
 
 `crates/db`フォルダにいることを確認してください。
-最初に私達のプロジェクトにクライアント側の依存を追加します。
+最初に私たちのプロジェクトにクライアント側の依存を追加します。
 
 ```sh
 cargo add tokio-postgres
